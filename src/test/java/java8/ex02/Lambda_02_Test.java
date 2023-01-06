@@ -24,6 +24,12 @@ public class Lambda_02_Test {
     private List<Account> map(List<Person> personList, PersonToAccountMapper mapper) {
         List<Account> accounts = new ArrayList<>();
         personList.forEach(p -> accounts.add(mapper.map(p)));
+        
+        for (Person p : personList) {
+        	Account ac = mapper.map(p);
+        	accounts.add(ac);
+        }
+        
         return accounts;
     }
     // end::map[]
@@ -37,7 +43,7 @@ public class Lambda_02_Test {
 
         // TODO transformer la liste de personnes en liste de comptes
         // TODO tous les objets comptes ont un solde à 100 par défaut
-        List<Account> result = map(personList, null);
+        List<Account> result = map(personList, p-> new Account(p, 100));
 
         assert result.size() == personList.size();
         for (Account account : result) {
